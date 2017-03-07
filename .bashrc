@@ -122,6 +122,11 @@ PS1='
 ❦❧ ❦❧ ❦❧ \[\e[1;30m\]\w \[\e[0;36m\]❦❧ ❦❧ ❦❧ ✎ \[\e[m\] '
 
 # Craig Peterson tested this .bashrc file at 11:04am on Saturday, March 4th. The colorful unicode icons surrounding the command prompt look AMAZING!
+
+
+# This has been tested and approved by Papa Brady (James the 3rd). 2157 4th day of March, 2017.  I really like the colorful symbols surrounding it.
+
 # Creates a custom prompt with date and time in a box, and user and host called out individually
 # Craig's custom prompt design: 
 # PS1='\n\[\e[0;31m\]☻\[\e[0;35m\]☻\[\e[0;34m\]☻\[\e[0;36m\]☻ \[\e[1;37m\]\[\e[1;40m\] ┏━━━━━━━━━━━━┓ \[\e[m\]\n\[\e[0;31m\]☣\[\e[0;35m\]☣\[\e[0;34m\]☣\[\e[0;36m\]☣ \[\e[1;37m\]\[\e[1;40m\] ┫ \d ┣ \[\e[m\]\n\[\e[0;31m\]☠\[\e[0;35m\]☠\[\e[0;34m\]☠\[\e[0;36m\]☠ \[\e[1;37m\]\[\e[1;40m\] ┫  \@  ┣ \[\e[m\]\n\[\e[0;31m\]☎\[\e[0;35m\]☎\[\e[0;34m\]☎\[\e[0;36m\]☎ \[\e[1;37m\]\[\e[1;40m\] ┗━━━━━━━━━━━━┛ \[\e[m\]\n\[\e[0;31m\]☢\[\e[0;35m\]☢\[\e[0;34m\]☢\[\e[0;36m\]☢ \[\e[1;32m\]\[\e[1;40m\] ⋐ USER: \[\e[1;33m\]\u \[\e[1;32m\] \[\e[m\]\n\[\e[0;31m\]✪\[\e[0;35m\]✪\[\e[0;34m\]✪\[\e[0;36m\]✪ \[\e[1;32m\]\[\e[1;40m\] ⋐ HOST: \[\e[1;33m\]\h \[\e[1;32m\] \[\e[m\]\n\[\e[0;31m\]✿\[\e[0;35m\]✿\[\e[0;34m\]✿\[\e[0;36m\]✿ \[\e[1;32m\]\[\e[1;40m\] ⋐ PATH: \[\e[1;33m\]$(pwd) \[\e[1;32m\] \[\e[m\]\n\[\e[0;31m\]☘\[\e[0;35m\]☘\[\e[0;34m\]☘\[\e[0;36m\]☘ \[\e[1;34m\]\[\e[1;40m\] ⋐ TYPE YOUR COMMANDS HERE, BRUH: \$ \[\e[m\] '
+
