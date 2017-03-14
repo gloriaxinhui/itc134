@@ -1,84 +1,115 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
-student@mysql-debian ~ ->
- 02:44 PM Tue Feb 28$ git clone https://github.com/gloriaxinhui/itc134.git
-fatal: destination path 'itc134' already exists and is not an empty directory.
-student@mysql-debian ~ ->
- 02:45 PM Tue Feb 28$ rm -r itc134/
-rm: remove write-protected regular file ‘itc134/.git/objects/cc/586b1702a137733d63b12efe374fb1ac729e4e’? ^C
-student@mysql-debian ~ ->
- 02:46 PM Tue Feb 28$ rm -rf itc134/
-student@mysql-debian ~ ->
- 02:46 PM Tue Feb 28$ git clone https://github.com/gloriaxinhui/itc134.git
-Cloning into 'itc134'...
-remote: Counting objects: 26, done.
-remote: Total 26 (delta 0), reused 0 (delta 0), pack-reused 26
-Unpacking objects: 100% (26/26), done.
-Checking connectivity... done.
-student@mysql-debian ~ ->
- 02:46 PM Tue Feb 28$ cp .bashrc itc134
-student@mysql-debian ~ ->
- 02:47 PM Tue Feb 28$ cd itc134
-student@mysql-debian ~/itc134 ->
- 02:48 PM Tue Feb 28$ ls -la
-total 24
-drwxr-xr-x  3 student student 4096 Feb 28 14:47 .
-drwxr-xr-x 26 student student 4096 Feb 28 14:46 ..
--rw-r--r--  1 student student 3577 Feb 28 14:47 .bashrc
-drwxr-xr-x  8 student student 4096 Feb 28 14:46 .git
--rw-r--r--  1 student student  101 Feb 28 14:46 newfile.txt
--rw-r--r--  1 student student   49 Feb 28 14:46 README.md
-student@mysql-debian ~/itc134 ->
- 02:48 PM Tue Feb 28$ git add .bashrc
-student@mysql-debian ~/itc134 ->
- 02:49 PM Tue Feb 28$ git commit -a -m "added file"
-[master 8a14952] added file
- Committer: student <student@mysql-debian>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
-After doing this, you may fix the identity used for this commit with:
+# append to the history file, don't overwrite it
+shopt -s histappend
 
-    git commit --amend --reset-author
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
 
- 1 file changed, 115 insertions(+)
- create mode 100644 .bashrc
-student@mysql-debian ~/itc134 ->
- 02:50 PM Tue Feb 28$ ^C
-student@mysql-debian ~/itc134 ->
- 02:50 PM Tue Feb 28$ git config --global user.email gloriaxinhui@gmail.com
-student@mysql-debian ~/itc134 ->
- 02:50 PM Tue Feb 28$ git push
-warning: push.default is unset; its implicit value has changed in
-Git 2.0 from 'matching' to 'simple'. To squelch this message
-and maintain the traditional behavior, use:
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-  git config --global push.default matching
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
 
-To squelch this message and adopt the new behavior now, use:
+# make less more friendly for non-text input files, see lesspipe(1)
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-  git config --global push.default simple
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
 
-When push.default is set to 'matching', git will push local branches
-to the remote branches that already exist with the same name.
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
 
-Since Git 2.0, Git defaults to the more conservative 'simple'
-behavior, which only pushes the current branch to the corresponding
-remote branch that 'git pull' uses to update the current branch.
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
 
-See 'git help config' and search for 'push.default' for further information.
-(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
-'current' instead of 'simple' if you sometimes use older versions of Git)
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
 
-Username for 'https://github.com': gloriaxinhui
-Password for 'https://gloriaxinhui@github.com': 
-Counting objects: 3, done.
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 1.88 KiB | 0 bytes/s, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/gloriaxinhui/itc134.git
-   bdfd475..8a14952  master -> master
-   
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    #alias grep='grep --color=auto'
+    #alias fgrep='fgrep --color=auto'
+    #alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+#alias ll='ls -l'
+#alias la='ls -A'
+#alias l='ls -CF'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+PS1='\[\e[1;33m\]\u@\h \w ->\n\[\e[1;36m\] \@ \d\$\[\e[m\] '
